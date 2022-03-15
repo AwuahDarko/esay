@@ -16,6 +16,7 @@
     "express": "^4.17.3",
     "mysql": "^2.18.1",
     "mysql-connection-pool-manager": "^1.5.9",
+    "mysql2": "^2.3.3",
     "nodemon": "^2.0.15",
     "uuid": "^8.3.2"
   }

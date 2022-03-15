@@ -1,63 +1,22 @@
 'use strict';
-const mysql = require('mysql');
-const PoolManager = require('mysql-connection-pool-manager');
 
+const mysql = require('mysql2');
 
 const password = process.env.password
 const user = process.env.user
 
-const options = {
-  idleCheckInterval: 1000,
-  maxConnextionTimeout: 30000,
-  idlePoolTimeout: 3000,
-  errorLimit: 5,
-  preInitDelay: 50,
-  sessionTimeout: 60000,
-  onConnectionAcquire: () => {
-    console.log('Acquire');
-  },
-  onConnectionConnect: () => {
-    console.log('Connect');
-  },
-  onConnectionEnqueue: () => {
-    console.log('Enqueue');
-  },
-  onConnectionRelease: () => {
-    console.log('Release');
-  },
-  mySQLSettings: {
-    host: 'localhost',
-    user: user, 
-    password: password, 
-    database: 'esay',
-    port: '3306',
-    socketPath: '/var/run/mysqld/mysqld.sock',
-    charset: 'utf8',
-    multipleStatements: true,
-    connectTimeout: 15000,
-    acquireTimeout: 10000,
-    waitForConnections: true,
-    connectionLimit: 1000,
-    queueLimit: 5000,
-    debug: false,
-    insecureAuth: true
-  },
-};
+// get the client
 
-// Initialising the instance
-const mySQL = PoolManager(options);
-
-const database = mySQL.raw.createConnection({
+// Create the connection pool. The pool-specific settings are the defaults
+const database = mysql.createPool({
   host: 'localhost',
-  user: user, 
-  password: password, 
+  user: user,
+  password: password,
   database: 'esay',
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
 });
 
-database.connect((err) => {
-  if (err) throw err;
-
-  console.log('connected to mysql.....');
-});
 
 module.exports = database;
