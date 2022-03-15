@@ -1,3 +1,6 @@
+CREATE schema esay;
+
+
 CREATE TABLE `esay`.`control_board` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `board_name` VARCHAR(45) NULL,
