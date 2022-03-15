@@ -40,6 +40,7 @@ const options = {
     connectionLimit: 1000,
     queueLimit: 5000,
     debug: false,
+    insecureAuth: true
   },
 };
 
