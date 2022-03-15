@@ -3,8 +3,8 @@ const mysql = require('mysql');
 const PoolManager = require('mysql-connection-pool-manager');
 
 
-const password = ''
-const user = 'root'
+const password = process.env.password
+const user = process.env.user
 
 const options = {
   idleCheckInterval: 1000,
