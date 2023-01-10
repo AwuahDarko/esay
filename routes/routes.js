@@ -56,10 +56,10 @@ module.exports = (app) => {
     })
 
     app.post('/appliances', async (req, res) => {
-        const { device } = req.body;
+        const { id, client_status } = req.body;
 
         try {
-            const parameter = [device.id, device.client_status]
+            const parameter = [client_status, id, ]
             await mysql.query('update control_board set client_status = ? where id = ?', parameter)
 
             res.status(200).json({message: 'Command sent, waiting for feedback...'})
